@@ -1,0 +1,2 @@
+rootProject.name = "calorie_vault"
+include ':app'
