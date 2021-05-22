@@ -1,7 +1,8 @@
-package com.example.calorie_vault
+package com.example.calorie_vault.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.calorie_vault.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">calorie_vault</string>
+
+<!--Strings in the item_meal-->
+    <string name="meal_description">Sweet heavens, this is absolutely divine. I would definitely eat this again. but it is so high in calories; I do not know if I should. Oh, heck, I would.</string>
+
 </resources>
