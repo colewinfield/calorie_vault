@@ -6,7 +6,7 @@
     app:startDestination="@id/todayFragment2">
     <fragment
         android:id="@+id/todayFragment2"
-        android:name="com.example.calorie_vault.ui.TodayFragment"
+        android:name="com.example.calorie_vault.ui.MealsFragment"
         android:label="fragment_today"
         tools:layout="@layout/fragment_today" />
 </navigation>

@@ -7,6 +7,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -16,14 +19,24 @@ object AppModule {
     @Singleton
     @Provides
     fun provideDatabase(
-        app: Application
+        app: Application,
+        callback: MealDatabase.Callback
     ) = Room.databaseBuilder(app, MealDatabase::class.java, "meal_database")
         .fallbackToDestructiveMigration()
-        .addCallback()
+        .addCallback(callback)
         .build()
-
 
     @Provides
     fun providesMealDao(db: MealDatabase) = db.mealDao()
 
+    @ApplicationScope
+    @Singleton
+    @Provides
+    fun providesApplicationScope() = CoroutineScope(SupervisorJob())
+
+
 }
+
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
+annotation class ApplicationScope

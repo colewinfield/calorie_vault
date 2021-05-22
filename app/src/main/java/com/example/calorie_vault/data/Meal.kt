@@ -11,8 +11,8 @@ import java.util.*
 data class Meal(
     val meal: String,
     val calories: Int,
-    val description: String,
-    val date: Date,
+    val description: String = "",
+    val date: Date = Calendar.getInstance().time,
     val worthIt: Boolean = false,
     @PrimaryKey(autoGenerate = true) val id: Int = 0
 ) : Parcelable { }
