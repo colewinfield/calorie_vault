@@ -8,5 +8,5 @@
         android:id="@+id/todayFragment2"
         android:name="com.example.calorie_vault.ui.MealsFragment"
         android:label="fragment_today"
-        tools:layout="@layout/fragment_today" />
+        tools:layout="@layout/fragment_meals" />
 </navigation>
