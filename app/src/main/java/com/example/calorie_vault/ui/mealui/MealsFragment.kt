@@ -1,4 +1,4 @@
-package com.example.calorie_vault.ui
+package com.example.calorie_vault.ui.mealui
 
 import android.os.Bundle
 import android.view.View
@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calorie_vault.R
-import com.example.calorie_vault.data.MealsAdapter
-import com.example.calorie_vault.data.MealsViewModel
+import com.example.calorie_vault.data.mealdata.MealsAdapter
+import com.example.calorie_vault.data.mealdata.MealsViewModel
 import com.example.calorie_vault.databinding.FragmentMealsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,16 +29,24 @@ class MealsFragment : Fragment(R.layout.fragment_meals) {
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
 
-                // data should not be put into the fragment; instead, use the viewModel
-                // the viewModel survives configuration changes and keeps the data
-                // also a Separation of Concerns
+                /**
+                 * Data should not be put into the fragment; instead, use the viewModel
+                 * which survives the configuration changes and keeps the data.
+                 */
             }
+
+            fabAddMeal.setOnClickListener {
+                viewModel.onAddMealClicked()
+            }
+
         }
 
         viewModel.meals.observe(viewLifecycleOwner) {
-            mealsAdapter.submitList(it) // we pass the new list if it has changed
-            // and then diffCallback calculates the changes
-            // and then ListAdapter takes care of the visual update
+            /**
+             * We pass the list if it has changed and then diffCallback calculates the
+             * changes and then ListAdapter takes care of the visual update.
+             */
+            mealsAdapter.submitList(it)
         }
     }
 

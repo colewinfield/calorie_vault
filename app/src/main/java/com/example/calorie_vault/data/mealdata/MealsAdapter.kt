@@ -1,6 +1,5 @@
-package com.example.calorie_vault.data
+package com.example.calorie_vault.data.mealdata
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,9 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calorie_vault.databinding.ItemMealBinding
 
-// use a ListAdapter when receiving a "flow" of lists, which our database is sending. Completely new
-// list. Not single items. Calculates difference between old and new list and updates the list;
-// done in the background thread.
+/**
+ * Use a ListAdapter when receiving a flow of lists, which our database is sending. Completely
+ * new list. Not single items. Calculates difference between old and new list items and updates.
+ * Done in background thread.
+ */
+
 class MealsAdapter : ListAdapter<Meal, MealsAdapter.MealViewHolder>(DiffCallback()) {
 
 
@@ -24,9 +26,11 @@ class MealsAdapter : ListAdapter<Meal, MealsAdapter.MealViewHolder>(DiffCallback
         holder.bind(currentItem)
     }
 
-    // Instead of using a lot of "findViewByID's, we use viewBinding here. It searches the
-    // XML file and finds the assets itself.
-    //ViewHolder is how the views interact with the data.
+
+    /**
+     * Instead of using a lot of findViewById's, we use viewBinding. Searches XML file
+     * and finds the assets.
+     */
     class MealViewHolder(private val binding: ItemMealBinding) : RecyclerView.ViewHolder(binding.root) {
 
         // put the data into the views inside the layout
@@ -40,8 +44,10 @@ class MealsAdapter : ListAdapter<Meal, MealsAdapter.MealViewHolder>(DiffCallback
     }
 
 
-    // ListAdapter doesn't know how to directly tell the difference between a new list and an old
-    // list, so it needs this callback to determine that.
+    /**
+     * Use this DiffCallBack to differentiate new items in the RecyclerView from old ones.
+     * This is what the ListAdapter uses to make its calculations.
+     */
     class DiffCallback : DiffUtil.ItemCallback<Meal>() {
         override fun areItemsTheSame(oldItem: Meal, newItem: Meal) = oldItem.id == newItem.id
 

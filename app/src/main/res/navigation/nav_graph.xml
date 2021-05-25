@@ -6,7 +6,16 @@
     app:startDestination="@id/todayFragment2">
     <fragment
         android:id="@+id/todayFragment2"
-        android:name="com.example.calorie_vault.ui.MealsFragment"
+        android:name="com.example.calorie_vault.ui.mealui.MealsFragment"
         android:label="fragment_today"
-        tools:layout="@layout/fragment_meals" />
+        tools:layout="@layout/fragment_meals" >
+        <action
+            android:id="@+id/action_todayFragment2_to_addEditMealsFragment"
+            app:destination="@id/addEditMealsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditMealsFragment"
+        android:name="com.example.calorie_vault.ui.addeditmealsui.AddEditMealsFragment"
+        android:label="fragment_add_edit_meal"
+        tools:layout="@layout/fragment_add_edit_meal" />
 </navigation>

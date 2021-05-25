@@ -2,7 +2,7 @@ package com.example.calorie_vault.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.calorie_vault.data.MealDatabase
+import com.example.calorie_vault.data.mealdata.MealDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

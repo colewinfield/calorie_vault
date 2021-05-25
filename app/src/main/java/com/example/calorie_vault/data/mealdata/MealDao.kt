@@ -1,4 +1,4 @@
-package com.example.calorie_vault.data
+package com.example.calorie_vault.data.mealdata
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
