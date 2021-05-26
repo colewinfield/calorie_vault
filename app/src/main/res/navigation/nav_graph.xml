@@ -3,19 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/todayFragment2">
+    app:startDestination="@id/mealsFragment">
     <fragment
-        android:id="@+id/todayFragment2"
+        android:id="@+id/mealsFragment"
         android:name="com.example.calorie_vault.ui.mealui.MealsFragment"
-        android:label="fragment_today"
-        tools:layout="@layout/fragment_meals" >
+        android:label="fragment_meals"
+        tools:layout="@layout/fragment_meals">
+
         <action
-            android:id="@+id/action_todayFragment2_to_addEditMealsFragment"
-            app:destination="@id/addEditMealsFragment" />
+            android:id="@+id/action_mealsFragment_to_addEditMealsFragment"
+            app:destination="@id/addEditMealsFragment"/>
     </fragment>
     <fragment
         android:id="@+id/addEditMealsFragment"
         android:name="com.example.calorie_vault.ui.addeditmealsui.AddEditMealsFragment"
         android:label="fragment_add_edit_meal"
-        tools:layout="@layout/fragment_add_edit_meal" />
+        tools:layout="@layout/fragment_add_edit_meal" >
+        <argument
+            android:name="meal"
+            app:argType="com.example.calorie_vault.data.mealdata.Meal"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calorie_vault.R
 import com.example.calorie_vault.data.mealdata.MealsAdapter
 import com.example.calorie_vault.data.mealdata.MealsViewModel
 import com.example.calorie_vault.databinding.FragmentMealsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class MealsFragment : Fragment(R.layout.fragment_meals) {
@@ -48,8 +51,26 @@ class MealsFragment : Fragment(R.layout.fragment_meals) {
              */
             mealsAdapter.submitList(it)
         }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.mealsEvents.collect { event ->
+                when (event) {
+                    is MealsViewModel.MealsEvent.NavigateToAddScreen -> {
+                        val action = MealsFragmentDirections.actionMealsFragmentToAddEditMealsFragment()
+                        findNavController().navigate(action)
+                    }
+                    is MealsViewModel.MealsEvent.NavigateToEditScreen -> {
+                        val action = MealsFragmentDirections.actionMealsFragmentToAddEditMealsFragment(event.meal)
+                        findNavController().navigate(action)
+                    }
+                }
+            }
+        }
+
+
+
+
+
     }
-
-
 
 }
