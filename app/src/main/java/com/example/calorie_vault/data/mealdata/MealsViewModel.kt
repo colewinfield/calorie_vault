@@ -27,6 +27,10 @@ class MealsViewModel @Inject constructor(
         eventsChannel.send(MealsEvent.NavigateToAddScreen)
     }
 
+    fun onEditClicked(meal: Meal) = viewModelScope.launch {
+        eventsChannel.send(MealsEvent.NavigateToEditScreen(meal))
+    }
+
 
     /**
      * These are the events that'll be sent back to the fragment to determine what's happening.

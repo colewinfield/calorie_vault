@@ -13,7 +13,7 @@ import com.example.calorie_vault.databinding.ItemMealBinding
  * Done in background thread.
  */
 
-class MealsAdapter : ListAdapter<Meal, MealsAdapter.MealViewHolder>(DiffCallback()) {
+class MealsAdapter(private val listener: OnItemClickListener) : ListAdapter<Meal, MealsAdapter.MealViewHolder>(DiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
@@ -31,7 +31,20 @@ class MealsAdapter : ListAdapter<Meal, MealsAdapter.MealViewHolder>(DiffCallback
      * Instead of using a lot of findViewById's, we use viewBinding. Searches XML file
      * and finds the assets.
      */
-    class MealViewHolder(private val binding: ItemMealBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MealViewHolder(private val binding: ItemMealBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.apply {
+
+                buttonEditMeal.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        val meal = getItem(position)
+                        listener.onEditClicked(meal)
+                    }
+                }
+
+            }
+        }
 
         // put the data into the views inside the layout
         fun bind(meal: Meal) {
@@ -40,6 +53,7 @@ class MealsAdapter : ListAdapter<Meal, MealsAdapter.MealViewHolder>(DiffCallback
                 textViewMealDescription.text = meal.description
                 textViewMealCalories.text = meal.calories.toString()
             }
+
         }
     }
 
@@ -52,5 +66,13 @@ class MealsAdapter : ListAdapter<Meal, MealsAdapter.MealViewHolder>(DiffCallback
         override fun areItemsTheSame(oldItem: Meal, newItem: Meal) = oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Meal, newItem: Meal) = oldItem == newItem
+    }
+
+    /**
+     * Used to communicate between two classes that a button has been clicked. Particularly the
+     * "edit" and "worth it" buttons on the cards in the RecyclerView.
+     */
+    interface OnItemClickListener {
+        fun onEditClicked(meal: Meal)
     }
 }

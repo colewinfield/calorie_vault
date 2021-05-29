@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calorie_vault.R
+import com.example.calorie_vault.data.mealdata.Meal
 import com.example.calorie_vault.data.mealdata.MealsAdapter
 import com.example.calorie_vault.data.mealdata.MealsViewModel
 import com.example.calorie_vault.databinding.FragmentMealsBinding
@@ -15,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class MealsFragment : Fragment(R.layout.fragment_meals) {
+class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClickListener {
 
     private val viewModel: MealsViewModel by viewModels()
 
@@ -24,7 +25,7 @@ class MealsFragment : Fragment(R.layout.fragment_meals) {
 
         val binding = FragmentMealsBinding.bind(view)
 
-        val mealsAdapter = MealsAdapter()
+        val mealsAdapter = MealsAdapter(this)
 
         binding.apply {
             recyclerViewMeals.apply {
@@ -68,9 +69,11 @@ class MealsFragment : Fragment(R.layout.fragment_meals) {
         }
 
 
-
-
-
     }
+
+    override fun onEditClicked(meal: Meal) {
+        viewModel.onEditClicked(meal)
+    }
+
 
 }
