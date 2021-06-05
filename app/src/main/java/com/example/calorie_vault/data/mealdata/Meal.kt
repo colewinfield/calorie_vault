@@ -11,9 +11,7 @@ import java.text.DateFormat
 data class Meal(
     val meal: String,
     val calories: Int,
-    val description: String = "",
     val date: Long = System.currentTimeMillis(),
-    val worthIt: Boolean = false,
     @PrimaryKey(autoGenerate = true) val id: Int = 0
 ) : Parcelable {
 

@@ -1,2 +1,4 @@
-TODO: Implement a second database that'll keep favorite foods. Makes it easy to add in the meals. Something similar to LifeSum's 'add meal.'
 TODO: Add the calendar somewhere -- consider a bottom navigation bar.
+
+TODO: Rearrange the cards in MealsFragment -- move the calorie count to the right hand side, make it bigger. Also, make the description "invisible."
+TODO: (Working on now): Make the "submit button" add the meal to the database.

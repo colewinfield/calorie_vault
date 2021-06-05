@@ -27,11 +27,11 @@ abstract class MealDatabase : RoomDatabase() {
             val dao = database.get().mealDao()
             // db operations
             applicationScope.launch {
-                dao.insert(Meal("Bagels and cream cheese",411, description = "Deliciously yummy!", worthIt = true))
+                dao.insert(Meal("Bagels and cream cheese",411))
                 dao.insert(Meal("PB & J",695))
-                dao.insert(Meal("Ice cream (neapolitan)",1111, description = "Wasn't that great, sadly.", worthIt = false))
-                dao.insert(Meal("Coco Puffs",314, description = "I ran out of milk too quickly."))
-                dao.insert(Meal("Bagels and cream cheese",411, description = "My second bagel of the day!", worthIt = false))
+                dao.insert(Meal("Ice cream (neapolitan)",1111))
+                dao.insert(Meal("Coco Puffs",314))
+                dao.insert(Meal("Bagels and cream cheese",411))
 
             }
 

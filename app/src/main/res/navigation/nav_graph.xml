@@ -14,9 +14,7 @@
             android:id="@+id/action_mealsFragment_to_addEditMealsFragment"
             app:destination="@id/addEditMealsFragment"
             app:enterAnim="@android:anim/slide_out_right"
-            app:exitAnim="@android:anim/slide_in_left"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:exitAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/addEditMealsFragment"

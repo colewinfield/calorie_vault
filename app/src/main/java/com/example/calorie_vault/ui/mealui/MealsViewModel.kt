@@ -1,8 +1,10 @@
-package com.example.calorie_vault.data.mealdata
+package com.example.calorie_vault.ui.mealui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.calorie_vault.data.mealdata.Meal
+import com.example.calorie_vault.data.mealdata.MealDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow

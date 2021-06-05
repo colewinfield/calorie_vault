@@ -35,7 +35,7 @@ class MealsAdapter(private val listener: OnItemClickListener) : ListAdapter<Meal
         init {
             binding.apply {
 
-                buttonEditMeal.setOnClickListener {
+                root.setOnClickListener {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
                         val meal = getItem(position)
@@ -50,7 +50,6 @@ class MealsAdapter(private val listener: OnItemClickListener) : ListAdapter<Meal
         fun bind(meal: Meal) {
             binding.apply {
                 textViewMealName.text = meal.meal
-                textViewMealDescription.text = meal.description
                 textViewMealCalories.text = meal.calories.toString()
             }
 
