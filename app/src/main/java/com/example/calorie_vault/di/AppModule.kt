@@ -2,7 +2,7 @@ package com.example.calorie_vault.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.calorie_vault.data.mealdata.MealDatabase
+import com.example.calorie_vault.data.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,14 +20,14 @@ object AppModule {
     @Provides
     fun provideDatabase(
         app: Application,
-        callback: MealDatabase.Callback
-    ) = Room.databaseBuilder(app, MealDatabase::class.java, "meal_database")
+        callback: AppDatabase.Callback
+    ) = Room.databaseBuilder(app, AppDatabase::class.java, "meal_database")
         .fallbackToDestructiveMigration()
         .addCallback(callback)
         .build()
 
     @Provides
-    fun providesMealDao(db: MealDatabase) = db.mealDao()
+    fun providesMealDao(db: AppDatabase) = db.mealDao()
 
     @ApplicationScope
     @Singleton

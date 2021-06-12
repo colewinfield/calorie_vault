@@ -31,7 +31,6 @@ class AddEditMealsFragment : Fragment(R.layout.fragment_add_edit_meal) {
 
 
             fabAddEditSubmit.setOnClickListener {
-                // TODO:
                 viewModel.onSaveClick()
             }
 

@@ -1,5 +1,6 @@
 package com.example.calorie_vault.ui.mealui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -16,7 +17,7 @@ class MealsViewModel @Inject constructor(
     private val mealDao : MealDao
 ) : ViewModel() {
 
-
+    private val TAG = "MealsViewModel"
     // whenever the table updates, new list of meals through this flow.
     // viewModel should never have a reference to the fragment to avoid memory leaks
     val meals = mealDao.getMeals().asLiveData()
@@ -31,6 +32,7 @@ class MealsViewModel @Inject constructor(
 
     fun onEditClicked(meal: Meal) = viewModelScope.launch {
         eventsChannel.send(MealsEvent.NavigateToEditScreen(meal))
+        Log.i(TAG, "Clicked meal's date: " + meal.date)
     }
 
 

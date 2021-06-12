@@ -1,4 +1,11 @@
 TODO: Add the calendar somewhere -- consider a bottom navigation bar.
 
-TODO: Rearrange the cards in MealsFragment -- move the calorie count to the right hand side, make it bigger. Also, make the description "invisible."
-TODO: (Working on now): Make the "submit button" add the meal to the database.
+TODO: New design - remaining calories (ratio) at top of home screen, below it is calendar, then meals
+TODO: Add new meal category to Meal and allow users to pick it (lunch, dinner, etc.)
+TODO: Add a "water gauge" that monitors your water intake at top of home screen, near calories
+TODO: Add insulting messages (eventually at the end)
+
+TODO: Make the calories in the food item RecyclerView look better - maybe make it into a pie graph?
+
+TODO: June 5th, only get today's meals. Then implement a calendar select to get meals from different dates.
+

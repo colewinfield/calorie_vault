@@ -1,21 +1,27 @@
-package com.example.calorie_vault.data.mealdata
+package com.example.calorie_vault.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.calorie_vault.data.mealdata.Meal
+import com.example.calorie_vault.data.mealdata.MealDao
 import com.example.calorie_vault.di.ApplicationScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Provider
 
 @Database(entities = [Meal::class], version = 1, exportSchema = false)
-abstract class MealDatabase : RoomDatabase() {
+@TypeConverters(AppDatabase.Converters::class)
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun mealDao() : MealDao
 
     class Callback @Inject constructor(
-        private val database: Provider<MealDatabase>,
+        private val database: Provider<AppDatabase>,
         @ApplicationScope private val applicationScope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
@@ -35,6 +41,18 @@ abstract class MealDatabase : RoomDatabase() {
 
             }
 
+        }
+    }
+
+    class Converters {
+        @TypeConverter
+        fun fromTimeStamp(value: Long?) : Date? {
+            return value?.let { Date(it) }
+        }
+
+        @TypeConverter
+        fun dateToTimestamp(date: Date?): Long? {
+            return date?.time?.toLong()
         }
     }
 
