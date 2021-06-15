@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,7 +21,8 @@ class MealsViewModel @Inject constructor(
     private val TAG = "MealsViewModel"
     // whenever the table updates, new list of meals through this flow.
     // viewModel should never have a reference to the fragment to avoid memory leaks
-    val meals = mealDao.getMeals().asLiveData()
+    private val currentDay = Date()
+    val meals = mealDao.getMeals(currentDay).asLiveData()
 
     private val eventsChannel = Channel<MealsEvent>()
     val mealsEvents = eventsChannel.receiveAsFlow()
