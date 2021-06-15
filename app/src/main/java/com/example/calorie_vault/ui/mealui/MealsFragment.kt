@@ -42,6 +42,10 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
                 viewModel.onAddMealClicked()
             }
 
+            buttonNewDate.setOnClickListener {
+                viewModel.onNewDateClicked()
+            }
+
         }
 
         viewModel.meals.observe(viewLifecycleOwner) {
@@ -61,6 +65,10 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
                     }
                     is MealsViewModel.MealsEvent.NavigateToEditScreen -> {
                         val action = MealsFragmentDirections.actionMealsFragmentToAddEditMealsFragment(event.meal)
+                        findNavController().navigate(action)
+                    }
+                    is MealsViewModel.MealsEvent.NavigateToNewDateScreen -> {
+                        val action = MealsFragmentDirections.actionGlobalDatePickerFragment()
                         findNavController().navigate(action)
                     }
                 }

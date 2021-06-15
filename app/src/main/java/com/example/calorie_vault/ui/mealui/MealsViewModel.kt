@@ -39,6 +39,10 @@ class MealsViewModel @Inject constructor(
         Log.i(TAG, "Clicked meal's date: " + meal.date)
     }
 
+    fun onNewDateClicked() = viewModelScope.launch {
+        eventsChannel.send(MealsEvent.NavigateToNewDateScreen)
+    }
+
 
     /**
      * These are the events that'll be sent back to the fragment to determine what's happening.
@@ -47,6 +51,7 @@ class MealsViewModel @Inject constructor(
      */
     sealed class MealsEvent {
         object NavigateToAddScreen : MealsEvent()
+        object NavigateToNewDateScreen : MealsEvent()
         data class NavigateToEditScreen(val meal: Meal) : MealsEvent()
     }
 }

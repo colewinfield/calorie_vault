@@ -10,4 +10,6 @@
     <string name="calories">Calories</string>
     <string name="totally_worth_it">Totally worth it</string>
     <string name="so_not_worth_it">So Not Worth It</string>
+    <string name="pick_a_different_day">Pick a different day</string>
+    <string name="new_date">New Date</string>
 </resources>
