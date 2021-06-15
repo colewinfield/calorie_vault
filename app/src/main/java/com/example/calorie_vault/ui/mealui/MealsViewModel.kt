@@ -21,6 +21,8 @@ class MealsViewModel @Inject constructor(
     private val TAG = "MealsViewModel"
     // whenever the table updates, new list of meals through this flow.
     // viewModel should never have a reference to the fragment to avoid memory leaks
+
+    // TODO: get currentDay to observe the fragment UI -- wow my filter worked first try!
     private val currentDay = Date()
     val meals = mealDao.getMeals(currentDay).asLiveData()
 

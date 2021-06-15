@@ -10,9 +10,8 @@ import java.util.*
 @Dao
 interface MealDao {
 
-    val dateToTimeConverter: DateToTimeConverter
-
     fun getMeals(date: Date) : Flow<List<Meal>> {
+        val dateToTimeConverter = DateToTimeConverter
         val startOfDay = dateToTimeConverter.atStartOfDate(date)
         val endOfDay = dateToTimeConverter.atEndOfDay(date)
         return getMealsByDate(startOfDay, endOfDay)
