@@ -1,10 +1,7 @@
 package com.example.calorie_vault.ui.mealui
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.calorie_vault.data.mealdata.Meal
 import com.example.calorie_vault.data.mealdata.MealDao
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,13 +17,9 @@ class MealsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val TAG = "MealsViewModel"
-    // whenever the table updates, new list of meals through this flow.
-    // viewModel should never have a reference to the fragment to avoid memory leaks
 
-    // TODO: get currentDay to observe the fragment UI -- wow my filter worked first try!
-//    private val currentDay = Date()
     private val currentDay: MutableLiveData<Date> = MutableLiveData(Date())
-    val meals = mealDao.getMeals(currentDay.value!!).asLiveData()
+    val meals = Transformations.switchMap(currentDay){ date -> mealDao.getMeals(date).asLiveData() }
 
     private val eventsChannel = Channel<MealsEvent>()
     val mealsEvents = eventsChannel.receiveAsFlow()
@@ -38,7 +31,6 @@ class MealsViewModel @Inject constructor(
 
     fun onEditClicked(meal: Meal) = viewModelScope.launch {
         eventsChannel.send(MealsEvent.NavigateToEditScreen(meal))
-        Log.i(TAG, "Clicked meal's date: " + meal.date)
     }
 
     fun onNewDateClicked() = viewModelScope.launch {
@@ -46,12 +38,9 @@ class MealsViewModel @Inject constructor(
     }
 
     fun setDate(year: Int?, month: Int?, day: Int?) {
-        Log.d(TAG, "setDate: setDate called when button is pressed.")
-
         if (year != null && month != null && day != null) {
             val date = GregorianCalendar(year, month, day).time
             currentDay.value = date
-            Log.d(TAG, "setDate: Date picked: " + date)
         }
     }
 
