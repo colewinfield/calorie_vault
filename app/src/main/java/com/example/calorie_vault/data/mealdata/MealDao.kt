@@ -1,5 +1,7 @@
 package com.example.calorie_vault.data.mealdata
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDateTime
@@ -11,6 +13,7 @@ import java.util.*
 interface MealDao {
 
     fun getMeals(date: Date) : Flow<List<Meal>> {
+        Log.d(TAG, "getMeals: Called after DatePicked")
         val dateToTimeConverter = DateToTimeConverter
         val startOfDay = dateToTimeConverter.atStartOfDate(date)
         val endOfDay = dateToTimeConverter.atEndOfDay(date)

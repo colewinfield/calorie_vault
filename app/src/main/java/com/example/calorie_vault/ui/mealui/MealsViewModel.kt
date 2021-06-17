@@ -1,6 +1,7 @@
 package com.example.calorie_vault.ui.mealui
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -23,8 +24,9 @@ class MealsViewModel @Inject constructor(
     // viewModel should never have a reference to the fragment to avoid memory leaks
 
     // TODO: get currentDay to observe the fragment UI -- wow my filter worked first try!
-    private val currentDay = Date()
-    val meals = mealDao.getMeals(currentDay).asLiveData()
+//    private val currentDay = Date()
+    private val currentDay: MutableLiveData<Date> = MutableLiveData(Date())
+    val meals = mealDao.getMeals(currentDay.value!!).asLiveData()
 
     private val eventsChannel = Channel<MealsEvent>()
     val mealsEvents = eventsChannel.receiveAsFlow()
@@ -41,6 +43,16 @@ class MealsViewModel @Inject constructor(
 
     fun onNewDateClicked() = viewModelScope.launch {
         eventsChannel.send(MealsEvent.NavigateToNewDateScreen)
+    }
+
+    fun setDate(year: Int?, month: Int?, day: Int?) {
+        Log.d(TAG, "setDate: setDate called when button is pressed.")
+
+        if (year != null && month != null && day != null) {
+            val date = GregorianCalendar(year, month, day).time
+            currentDay.value = date
+            Log.d(TAG, "setDate: Date picked: " + date)
+        }
     }
 
 

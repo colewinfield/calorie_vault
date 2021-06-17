@@ -3,6 +3,7 @@ package com.example.calorie_vault.ui.mealui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -17,7 +18,7 @@ import kotlinx.coroutines.flow.collect
 @AndroidEntryPoint
 class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClickListener {
 
-    private val viewModel: MealsViewModel by viewModels()
+    private val viewModel: MealsViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

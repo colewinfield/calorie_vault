@@ -54,7 +54,7 @@
                         android:layout_width="200dp"
                         android:layout_height="200dp"
                         android:layout_alignParentEnd="true"
-                        android:src="@drawable/date_picker_pic"/>
+                        android:src="@drawable/ic_date_picker"/>
 
 
                 </RelativeLayout>
@@ -73,7 +73,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="HELLO"
+                    android:text="Placeholder"
                     android:textSize="32sp" />
 
             </androidx.cardview.widget.CardView>
