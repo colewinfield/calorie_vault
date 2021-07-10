@@ -12,4 +12,8 @@
     <string name="so_not_worth_it">So Not Worth It</string>
     <string name="pick_a_different_day">Pick a different day</string>
     <string name="new_date">New Date</string>
+    <string name="home">Present Day</string>
+    <string name="calendar">Calendar</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
 </resources>

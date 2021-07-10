@@ -12,6 +12,7 @@ import com.example.calorie_vault.R
 import com.example.calorie_vault.data.mealdata.Meal
 import com.example.calorie_vault.data.mealdata.MealsAdapter
 import com.example.calorie_vault.databinding.FragmentMealsBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -39,11 +40,13 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
                  */
             }
 
+
             fabAddMeal.setOnClickListener {
                 viewModel.onAddMealClicked()
             }
 
-            buttonNewDate.setOnClickListener {
+
+            bottomNavBar.setNavigationOnClickListener {
                 viewModel.onNewDateClicked()
             }
 

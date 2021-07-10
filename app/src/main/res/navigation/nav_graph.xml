@@ -12,9 +12,7 @@
 
         <action
             android:id="@+id/action_mealsFragment_to_addEditMealsFragment"
-            app:destination="@id/addEditMealsFragment"
-            app:enterAnim="@android:anim/slide_out_right"
-            app:exitAnim="@android:anim/slide_in_left" />
+            app:destination="@id/addEditMealsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addEditMealsFragment"
