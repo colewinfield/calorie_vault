@@ -1,7 +1,14 @@
 package com.example.calorie_vault.ui.mealui
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -32,7 +39,7 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
             recyclerViewMeals.apply {
                 adapter = mealsAdapter
                 layoutManager = LinearLayoutManager(requireContext())
-                setHasFixedSize(true)
+                setHasFixedSize(false)
 
                 /**
                  * Data should not be put into the fragment; instead, use the viewModel
@@ -57,7 +64,14 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
              * We pass the list if it has changed and then diffCallback calculates the
              * changes and then ListAdapter takes care of the visual update.
              */
-            mealsAdapter.submitList(it)
+
+            if (it.isEmpty()) {
+                mealsAdapter.submitList(emptyList())
+                Log.d(TAG, "Found list: $it")
+            } else {
+                mealsAdapter.submitList(it)
+                Log.d(TAG, "Found list: $it")
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -78,6 +92,17 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
                 }
             }
         }
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(view) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            view.updatePadding(
+                top = insets.top
+            )
+            WindowInsetsCompat.CONSUMED
+        }
+
 
 
     }

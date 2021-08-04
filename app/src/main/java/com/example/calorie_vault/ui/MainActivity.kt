@@ -1,7 +1,7 @@
 package com.example.calorie_vault.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import com.example.calorie_vault.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,4 +14,5 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_main)
     }
+
 }

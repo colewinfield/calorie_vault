@@ -37,11 +37,13 @@ class MealsViewModel @Inject constructor(
         eventsChannel.send(MealsEvent.NavigateToNewDateScreen)
     }
 
+
     fun setDate(year: Int?, month: Int?, day: Int?) {
         if (year != null && month != null && day != null) {
             val date = GregorianCalendar(year, month, day).time
             currentDay.value = date
         }
+
     }
 
 
