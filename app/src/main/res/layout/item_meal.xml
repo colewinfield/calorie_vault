@@ -32,7 +32,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="24sp"
             tools:text="an absolutely delicious meal that's deserving of an award" />
 

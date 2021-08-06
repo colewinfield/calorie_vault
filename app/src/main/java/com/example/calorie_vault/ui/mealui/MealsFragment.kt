@@ -4,14 +4,11 @@ import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +16,6 @@ import com.example.calorie_vault.R
 import com.example.calorie_vault.data.mealdata.Meal
 import com.example.calorie_vault.data.mealdata.MealsAdapter
 import com.example.calorie_vault.databinding.FragmentMealsBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -47,6 +43,22 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
                  */
             }
 
+            viewModel.isEmptyMeals.observe(viewLifecycleOwner) { visibility ->
+                eatImageView.visibility = visibility
+                eatTextView.visibility = visibility
+            }
+
+
+            ViewCompat.setOnApplyWindowInsetsListener(binding.topAppBar) { _, windowInsets ->
+                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+                view.updatePadding(
+                    top = insets.top
+                )
+
+                WindowInsetsCompat.CONSUMED
+            }
+
 
             fabAddMeal.setOnClickListener {
                 viewModel.onAddMealClicked()
@@ -65,13 +77,7 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
              * changes and then ListAdapter takes care of the visual update.
              */
 
-            if (it.isEmpty()) {
-                mealsAdapter.submitList(emptyList())
-                Log.d(TAG, "Found list: $it")
-            } else {
-                mealsAdapter.submitList(it)
-                Log.d(TAG, "Found list: $it")
-            }
+            mealsAdapter.submitList(it)
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -93,15 +99,6 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
             }
         }
 
-
-        ViewCompat.setOnApplyWindowInsetsListener(view) { view, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-
-            view.updatePadding(
-                top = insets.top
-            )
-            WindowInsetsCompat.CONSUMED
-        }
 
 
 

@@ -1,11 +1,13 @@
 package com.example.calorie_vault.ui.mealui
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.*
 import com.example.calorie_vault.data.mealdata.Meal
 import com.example.calorie_vault.data.mealdata.MealDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import java.util.*
@@ -23,6 +25,10 @@ class MealsViewModel @Inject constructor(
 
     private val eventsChannel = Channel<MealsEvent>()
     val mealsEvents = eventsChannel.receiveAsFlow()
+
+    val isEmptyMeals = meals.map {
+        if (it.isNullOrEmpty()) View.VISIBLE else View.GONE
+    }
 
 
     fun onAddMealClicked() = viewModelScope.launch {

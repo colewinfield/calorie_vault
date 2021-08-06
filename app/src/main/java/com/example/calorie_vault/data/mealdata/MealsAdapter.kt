@@ -34,7 +34,6 @@ class MealsAdapter(private val listener: OnItemClickListener) : ListAdapter<Meal
     inner class MealViewHolder(private val binding: ItemMealBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.apply {
-
                 root.setOnClickListener {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {

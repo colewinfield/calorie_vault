@@ -14,4 +14,7 @@
     <color name="light_pink">#ffa7bc</color>
     <color name="dark_pink">#ca778c</color>
     <color name="dark_gray">#121212</color>
+    <color name="shrine_pink_100">#FEDBD0</color>
+    <color name="shrine_pink_900">#442C2E</color>
+    <color name="shrine_pink_50">#FEEAE6</color>
 </resources>
