@@ -46,6 +46,7 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
             viewModel.isEmptyMeals.observe(viewLifecycleOwner) { visibility ->
                 eatImageView.visibility = visibility
                 eatTextView.visibility = visibility
+                eatTextViewSummary.visibility = visibility
             }
 
 
@@ -84,8 +85,10 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
             viewModel.mealsEvents.collect { event ->
                 when (event) {
                     is MealsViewModel.MealsEvent.NavigateToAddScreen -> {
+                        // replacing action with newAction (action = old fragment, newAction = bottom sheet)
                         val action = MealsFragmentDirections.actionMealsFragmentToAddEditMealsFragment()
-                        findNavController().navigate(action)
+                        val newAction = MealsFragmentDirections.actionMealsFragmentToBottomSheetAddMeal()
+                        findNavController().navigate(newAction)
                     }
                     is MealsViewModel.MealsEvent.NavigateToEditScreen -> {
                         val action = MealsFragmentDirections.actionMealsFragmentToAddEditMealsFragment(event.meal)

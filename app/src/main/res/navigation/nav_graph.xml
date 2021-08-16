@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mealsFragment_to_addEditMealsFragment"
             app:destination="@id/addEditMealsFragment" />
+        <action
+            android:id="@+id/action_mealsFragment_to_bottomSheetAddMeal"
+            app:destination="@id/bottomSheetAddMeal" />
     </fragment>
     <fragment
         android:id="@+id/addEditMealsFragment"
@@ -29,4 +32,14 @@
         android:id="@+id/datePickerFragment"
         android:name="com.example.calorie_vault.ui.datepicker.DatePickerFragment"
         android:label="DatePickerFragment" /><action android:id="@+id/action_global_datePickerFragment" app:destination="@id/datePickerFragment"/>
+    <dialog
+        android:id="@+id/bottomSheetAddMeal"
+        android:name="com.example.calorie_vault.ui.addmeal.BottomSheetAddMeal"
+        android:label="BottomSheetAddMeal" >
+        <argument
+            android:name="meal"
+            app:argType="com.example.calorie_vault.data.mealdata.Meal"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </dialog>
 </navigation>
