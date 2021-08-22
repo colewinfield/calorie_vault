@@ -5,6 +5,8 @@ import android.view.View
 import androidx.lifecycle.*
 import com.example.calorie_vault.data.mealdata.Meal
 import com.example.calorie_vault.data.mealdata.MealDao
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.asFlow
@@ -30,6 +32,12 @@ class MealsViewModel @Inject constructor(
         if (it.isNullOrEmpty()) View.VISIBLE else View.GONE
     }
 
+    val enableOrDisableScroll = meals.map {
+        if (it.isNullOrEmpty()) AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL else
+                    AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP or
+                            AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
+                                AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
+    }
 
     fun onAddMealClicked() = viewModelScope.launch {
         eventsChannel.send(MealsEvent.NavigateToAddScreen)

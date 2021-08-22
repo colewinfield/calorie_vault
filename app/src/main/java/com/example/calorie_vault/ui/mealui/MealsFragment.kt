@@ -16,6 +16,7 @@ import com.example.calorie_vault.R
 import com.example.calorie_vault.data.mealdata.Meal
 import com.example.calorie_vault.data.mealdata.MealsAdapter
 import com.example.calorie_vault.databinding.FragmentMealsBinding
+import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -70,6 +71,15 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
                 viewModel.onNewDateClicked()
             }
 
+            viewModel.enableOrDisableScroll.observe(viewLifecycleOwner) {
+                val params: AppBarLayout.LayoutParams = collapsingToolBar.layoutParams
+                        as AppBarLayout.LayoutParams
+
+                params.scrollFlags = it
+                collapsingToolBar.layoutParams = params
+            }
+
+
         }
 
         viewModel.meals.observe(viewLifecycleOwner) {
@@ -86,7 +96,7 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
                 when (event) {
                     is MealsViewModel.MealsEvent.NavigateToAddScreen -> {
                         // replacing action with newAction (action = old fragment, newAction = bottom sheet)
-                        val action = MealsFragmentDirections.actionMealsFragmentToAddEditMealsFragment()
+//                        val action = MealsFragmentDirections.actionMealsFragmentToAddEditMealsFragment()
                         val newAction = MealsFragmentDirections.actionMealsFragmentToBottomSheetAddMeal()
                         findNavController().navigate(newAction)
                     }
@@ -101,9 +111,6 @@ class MealsFragment : Fragment(R.layout.fragment_meals), MealsAdapter.OnItemClic
                 }
             }
         }
-
-
-
 
     }
 

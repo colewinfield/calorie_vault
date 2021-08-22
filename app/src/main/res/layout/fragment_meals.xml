@@ -16,6 +16,7 @@
         android:layout_height="128dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_tool_bar"
             app:elevation="8dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,24 +33,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="Calorie Vault" />
+                app:title="Calorie Bank" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_marginTop="16dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_meals"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_meals"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </androidx.core.widget.NestedScrollView>
 
     <RelativeLayout
         android:layout_height="wrap_content"
@@ -119,3 +114,4 @@
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <!--app:layout_scrollFlags="scroll|enterAlways|snap"-->
+    <!--app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">-->
